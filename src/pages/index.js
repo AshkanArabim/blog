@@ -7,6 +7,14 @@ const pageStyles = {
 	fontFamily: "-apple-system, Roboto, sans-serif, serif",
 };
 
+const customLinkStyles = {
+	
+}
+
+const blogNameStyles = {
+	borderBottom: "1px solid black"
+}
+
 const IndexPage = () => {
 	const links = useStaticQuery(
 		graphql`
@@ -25,16 +33,33 @@ const IndexPage = () => {
 	);
 	console.log(links)
 	return (
-		<main style={pageStyles}>
-			<h1>Ashkan's Blog</h1>
-			<h2>I love computers, and I love cars.</h2>
-			<p>This is a very ugly hero. No CSS, as promised...</p>
-			<hr />
-			<h2>Here are some links:</h2>
-			{/* <a href="/blog/my-first-blog-post">make this dynamic</a> */}
-			{links.allMarkdownRemark.nodes.map(page => (
-				<p><a href={'/blog' + page.frontmatter.slug}>{page.frontmatter.title}</a></p>
-			))}
+		<main className="flex">
+			<div>
+				{/* empty space on left side */}
+				<div className="border-b-4 pt-20 pl-20 border-black w-32">
+					{/* top left */}
+					{/* invisible character to take up vertical space */}
+					<h1 className="text-6xl">ㅤ</h1> 
+				</div>
+				{/* bottom left is empty */}
+			</div>
+			<div>
+				{/* main content */}
+				<div className="border-b-4 border-l-4 pt-20 border-black">
+					{/* top right */}
+					<h1 className="text-6xl">When <a href="https://x.com/AshkanArabim">X (Twitter)</a> is too short</h1>
+				</div>
+				<div>
+					{/* bottom right */}
+					{/* <a href="/blog/my-first-blog-post">make this dynamic</a> */}
+					{links.allMarkdownRemark.nodes.map(page => (
+						<div className="align-middle">
+							<span className="bg-red-500 w-4 h-1">sdf</span>
+							<p className="border-l-4 border-black"><a href={'/blog' + page.frontmatter.slug}>{page.frontmatter.title}</a></p>
+						</div>
+					))}
+				</div>
+			</div>
 		</main>
 	)
 };
